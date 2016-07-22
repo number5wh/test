@@ -23,7 +23,7 @@
           <input class="weui_input" type="number" placeholder="请输入验证码"/>
       </div>
       <div class="weui_cell_ft">
-          <img src="/service/validate_code/create" class="bk_validate_code"/>
+          <img src="{{url('validate/img')}}" class="bk_validate_code"/>
       </div>
   </div>
 </div>
@@ -37,7 +37,7 @@
 @section('js')
 <script type="text/javascript">
   $('.bk_validate_code').click(function () {
-    $(this).attr('src', '/service/validate_code/create?random=' + Math.random());
+    $(this).attr('src', 'validate/img?random=' + Math.random());
   });
 </script>
 @endsection

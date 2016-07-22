@@ -11,6 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('login.login');
-});
+Route::get('/', 'Login\LoginController@login');
+Route::get('/login','Login\LoginController@login');
+Route::get('/register','Login\LoginController@register');
+Route::any('validate/img','Service\ValidateController@create');
