@@ -16,3 +16,4 @@ Route::get('/login','Login\LoginController@login');
 Route::get('/register','Login\LoginController@register');
 Route::any('validate/img','Service\ValidateController@create');
 Route::any('validate/sms','Service\ValidateController@sendSMS');
+Route::get('member/all','MemberController@all');
