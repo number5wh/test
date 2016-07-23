@@ -11,7 +11,7 @@ use App\Tool\SMS\SendTemplateSMS;
 use App\Models\M3Result;
 use Illuminate\Support\Facades\Input;
 
-//use App\Entity\TempEmail;
+use App\Entity\TempEmail;
 use App\Models\Member;
 
 class ValidateController extends Controller

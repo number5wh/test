@@ -15,6 +15,10 @@ class MemberController extends Controller
         return Member::all();
     }
 
+    public function findByid($id){
+        return Member::find($id);
+    }
+
     public function register(Request $request)
     {
         $m3 = new M3Result();

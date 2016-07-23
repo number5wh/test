@@ -10,7 +10,6 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
 Route::get('/', 'Login\LoginController@login');
 Route::get('/login','Login\LoginController@login');
 Route::get('/register','Login\LoginController@register');
