@@ -152,7 +152,7 @@
     }, 1000);
 
     $.ajax({
-      url: '/service/validate_phone/send',
+      url: 'validate/sms',
       dataType: 'json',
       cache: false,
       data: {phone: phone},
@@ -216,7 +216,7 @@
 
         $.ajax({
           type: "POST",
-          url: '/service/register',
+          url: 'member/register',
           dataType: 'json',
           cache: false,
           data: {phone: phone, email: email, password: password, confirm: confirm,

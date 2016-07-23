@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Service;
 
+use App\Models\Phonecode;
 use App\Tool\Validate\ValidateCode;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Tool\SMS\SendTemplateSMS;
-//use App\Entity\TempPhone;
 use App\Models\M3Result;
+use Illuminate\Support\Facades\Input;
+
 //use App\Entity\TempEmail;
 //use App\Entity\Member;
 
@@ -23,14 +25,38 @@ class ValidateController extends Controller
 
   public function sendSMS(Request $request)
   {
-     $charset = '1234567890';
-    $code='';
-     $_len = strlen($charset) - 1;
-     for ($i = 0;$i < 6;++$i) {
-      $code .= $charset[mt_rand(0, $_len)];
-    }
-     $sendSms = new SendTemplateSMS;
-     $sendSms->sendTemplateSMS("18649717581",array($code,60),1);
+//      dd($input);
+      $m3res = new M3Result;
+//      dd($request->input('phone'));
+      $phone = $request->input('phone','');
+//      dd($phone);
+      if(empty($phone)){
+          $m3res->status = 1;
+          $m3res->message = '手机号不能为空';
+          return $m3res->toJson();
+      }
+      $charset = '1234567890';
+      $code='';
+      $_len = strlen($charset) - 1;
+      for ($i = 0;$i < 6;++$i) {
+          $code .= $charset[mt_rand(0, $_len)];
+     }
+      $sendSms = new SendTemplateSMS;
+      $ms = $sendSms->sendTemplateSMS($phone,array($code,60),1);
+
+      $tmp = Phonecode::where('phone',$phone)->get();
+      if(count($tmp) != 0) {
+          Phonecode::where('phone', $phone)->delete();
+      }
+          $phonecode = new Phonecode();
+          $phonecode->phone = $phone;
+          $phonecode->deadline = date('Y-m-d H:i:s',time()+60*10);
+          $phonecode->code = $code;
+          $phonecode->save();
+          $m3res->message = '发送成功';
+          $m3res->status = 0;
+
+      return $m3res->toJson();
   }
 
 //  public function validateEmail(Request $request)

@@ -49,11 +49,14 @@ class SendTemplateSMS
        if($result->statusCode != 0) {
            $m3_result->status = $result->statusCode;
            $m3_result->message = $result->statusMsg;
+
        }else{
            $m3_result->status = 0;
            $m3_result->message = '发送成功';
-       }
 
+       }
+      echo $m3_result->message;
+      echo $m3_result->status;
        return $m3_result;
   }
 }
